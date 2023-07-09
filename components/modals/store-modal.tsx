@@ -38,6 +38,8 @@ export const StoreModal = () => {
                 throw new Error()
             }
             toast.success("Store created successfully!")
+            const { id } = await response.json()
+            window.location.assign(`/${id}`) //FULL REFRESH, so db can be queried again
         }
         catch (err) {
             toast.error("Something went wrong!Try again later.")
