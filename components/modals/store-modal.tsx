@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
 
 const formSchema = z.object({
     name: z.string().nonempty("Store name is required").min(3, "Store name must be at least 3 characters"),
@@ -16,6 +17,8 @@ const formSchema = z.object({
 
 export const StoreModal = () => {
     const storeModel = useStoreModal()
+    const [loading, setLoading] = useState(false)
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -24,7 +27,21 @@ export const StoreModal = () => {
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+        try {
+            setLoading(true)
+            const response = await fetch("/api/stores", {
+                method: "POST",
+                body: JSON.stringify(values),
+            })
+            const data = await response.json()
+            console.log(data)
+        }
+        catch (err) {
+            console.error(err)
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -44,15 +61,15 @@ export const StoreModal = () => {
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="E-Commerce" {...field} />
+                                        <Input disabled={loading} placeholder="E-Commerce" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
                         <div className="flex justify-end pt-6 space-x-2 items-center w-full">
-                            <Button variant={'outline'} onClick={storeModel.onClose}>Cancel</Button>
-                            <Button type="submit" >Continue</Button>
+                            <Button disabled={loading} variant={'outline'} onClick={storeModel.onClose}>Cancel</Button>
+                            <Button disabled={loading} type="submit" >Continue</Button>
                         </div>
                     </form>
                 </Form>
