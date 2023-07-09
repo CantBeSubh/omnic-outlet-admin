@@ -90,7 +90,7 @@ const BillboardForm = ({ initialData }: BillboardFormProps) => {
                 method: "DELETE",
             })
             router.refresh()
-            router.push("/")
+            router.push(`/${params.storeId}/billboards`)
             toast.success("Redirecting...")
         }
         catch (err) {
@@ -161,7 +161,6 @@ const BillboardForm = ({ initialData }: BillboardFormProps) => {
                     <Button disabled={loading} className="ml-auto" type="submit" >{action}</Button>
                 </form>
             </Form>
-            <Separator />
 
         </>
     );
