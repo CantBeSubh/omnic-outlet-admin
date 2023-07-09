@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 import AlertModal from "@/components/modals/alert-modal";
 import { useRouter } from "next/navigation";
+import ApiAlert from "@/components/ui/api-alert";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingFormProps {
     initialData: Store;
@@ -27,9 +29,10 @@ type SettingsFormValues = z.infer<typeof formSchema>;
 
 const SettingsForm = ({ initialData }: SettingFormProps) => {
 
-    const router = useRouter()
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
+    const origin = useOrigin()
 
     const form = useForm<SettingsFormValues>({
         resolver: zodResolver(formSchema),
@@ -115,6 +118,12 @@ const SettingsForm = ({ initialData }: SettingFormProps) => {
                     <Button disabled={loading} className="ml-auto" type="submit" >Save Changes</Button>
                 </form>
             </Form>
+            <Separator />
+            <ApiAlert
+                title="NEXT_PUBLIC_API_URL"
+                description={`${origin}/api/stores/${initialData.id}`}
+                variant="public"
+            />
         </>
     );
 }
