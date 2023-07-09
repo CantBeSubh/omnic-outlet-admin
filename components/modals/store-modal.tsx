@@ -37,7 +37,7 @@ export const StoreModal = () => {
             if (!response.ok) {
                 throw new Error()
             }
-            toast.success("Store created successfully!Redirecting...")
+            toast.success("Redirecting...")
             const { id } = await response.json()
             window.location.assign(`/${id}`) //FULL REFRESH, so db can be queried again
         }
