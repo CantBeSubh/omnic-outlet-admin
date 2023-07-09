@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { toast } from "react-hot-toast"
 
 const formSchema = z.object({
     name: z.string().nonempty("Store name is required").min(3, "Store name must be at least 3 characters"),
@@ -33,11 +34,13 @@ export const StoreModal = () => {
                 method: "POST",
                 body: JSON.stringify(values),
             })
-            const data = await response.json()
-            console.log(data)
+            if (!response.ok) {
+                throw new Error()
+            }
+            toast.success("Store created successfully!")
         }
         catch (err) {
-            console.error(err)
+            toast.error("Something went wrong!Try again later.")
         }
         finally {
             setLoading(false)

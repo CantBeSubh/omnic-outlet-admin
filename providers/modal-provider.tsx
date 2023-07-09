@@ -12,9 +12,6 @@ export const ModalProvider = () => {
 
     if (!mounted) return null;
 
-    return (
-        <>
-            <StoreModal />
-        </>
-    )
+    return <StoreModal />
+
 }
