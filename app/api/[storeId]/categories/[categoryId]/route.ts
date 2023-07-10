@@ -4,18 +4,18 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     req: Request,
-    { params }: { params: { billboardId: string } }
+    { params }: { params: { categoryId: string } }
 ) {
     try {
-        if (!params.billboardId) return new NextResponse("Billlboard ID is required", { status: 400 });
+        if (!params.categoryId) return new NextResponse("CategoryID is required", { status: 400 });
 
-        const billboard = await prismadb.billboard.findUnique({
+        const category = await prismadb.category.findUnique({
             where: {
-                id: params.billboardId,
+                id: params.categoryId,
             }
         })
 
-        return new NextResponse(JSON.stringify(billboard), {
+        return new NextResponse(JSON.stringify(category), {
             status: 200,
             headers: {
                 "Content-Type": "application/json"
@@ -23,23 +23,23 @@ export async function GET(
         });
     }
     catch (err) {
-        console.error('[BILLBOARD][GET][ERROR]', err);
+        console.error('[CATEGORY][GET][ERROR]', err);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
 
 export async function PUT(
     req: Request,
-    { params }: { params: { storeId: string, billboardId: string } }
+    { params }: { params: { storeId: string, categoryId: string } }
 ) {
     try {
         const { userId } = auth();
         const body = await req.json();
-        const { label, imageUrl } = body;
+        const { name, billboardId } = body;
         if (!userId) return new NextResponse("Unathenticated", { status: 401 });
-        if (!label) return new NextResponse("Label is required", { status: 400 });
-        if (!imageUrl) return new NextResponse("ImageURL is required", { status: 400 });
-        if (!params.billboardId) return new NextResponse("Billboard ID is required", { status: 400 });
+        if (!name) return new NextResponse("name is required", { status: 400 });
+        if (!billboardId) return new NextResponse("BillboardID is required", { status: 400 });
+        if (!params.categoryId) return new NextResponse("category ID is required", { status: 400 });
 
         const storeByUserId = await prismadb.store.findFirst({
             where: {
@@ -49,18 +49,18 @@ export async function PUT(
         });
         if (!storeByUserId) return new NextResponse("Unauthorized", { status: 403 });
 
-        const billboard = await prismadb.billboard.updateMany({
+        const category = await prismadb.category.updateMany({
             where: {
-                id: params.billboardId,
+                id: params.categoryId,
             },
             data: {
-                label,
-                imageUrl
+                name,
+                billboardId,
             }
         })
 
 
-        return new NextResponse(JSON.stringify(billboard), {
+        return new NextResponse(JSON.stringify(category), {
             status: 200,
             headers: {
                 "Content-Type": "application/json"
@@ -68,19 +68,19 @@ export async function PUT(
         });
     }
     catch (err) {
-        console.error('[BILLBOARD][PUT][ERROR]', err);
+        console.error('[CATEGORY][PUT][ERROR]', err);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { storeId: string, billboardId: string } }
+    { params }: { params: { storeId: string, categoryId: string } }
 ) {
     try {
         const { userId } = auth();
         if (!userId) return new NextResponse("Unathenticated", { status: 401 });
-        if (!params.billboardId) return new NextResponse("Billlboard ID is required", { status: 400 });
+        if (!params.categoryId) return new NextResponse("Billlboard ID is required", { status: 400 });
 
         const storeByUserId = await prismadb.store.findFirst({
             where: {
@@ -90,13 +90,13 @@ export async function DELETE(
         });
         if (!storeByUserId) return new NextResponse("Unauthorized", { status: 403 });
 
-        const billboard = await prismadb.billboard.deleteMany({
+        const category = await prismadb.category.deleteMany({
             where: {
-                id: params.billboardId,
+                id: params.categoryId,
             }
         })
 
-        return new NextResponse(JSON.stringify(billboard), {
+        return new NextResponse(JSON.stringify(category), {
             status: 200,
             headers: {
                 "Content-Type": "application/json"
@@ -104,7 +104,7 @@ export async function DELETE(
         });
     }
     catch (err) {
-        console.error('[BILLBOARD][DELETE][ERROR]', err);
+        console.error('[CATEGORY][DELETE][ERROR]', err);
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
