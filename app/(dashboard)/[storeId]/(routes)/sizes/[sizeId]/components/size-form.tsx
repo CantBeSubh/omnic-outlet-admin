@@ -34,7 +34,7 @@ const SizeForm = ({ initialData }: SizeFormProps) => {
 
     const title = initialData ? "Edit Size" : "Create Size"
     const description = initialData ? "Edit the Size" : "Add a new Size"
-    const toastMsg = initialData ? "Size updated" : "Created new billboard"
+    const toastMsg = initialData ? "Size updated" : "Created new Size"
     const action = initialData ? "Save Changes" : "Create"
 
     const params = useParams()

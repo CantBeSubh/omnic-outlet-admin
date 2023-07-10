@@ -33,7 +33,7 @@ const ColorForm = ({ initialData }: ColorFormProps) => {
 
     const title = initialData ? "Edit Color" : "Create Color"
     const description = initialData ? "Edit the Color" : "Add a new Color"
-    const toastMsg = initialData ? "Color updated" : "Created new billboard"
+    const toastMsg = initialData ? "Color updated" : "Created new color"
     const action = initialData ? "Save Changes" : "Create"
 
     const params = useParams()
