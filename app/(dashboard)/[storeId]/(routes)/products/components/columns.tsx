@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import CellActions from "./cell-actions"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export type ProductColumn = {
     id: string
@@ -20,14 +21,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
         accessorKey: "name",
         header: "Name",
     },
-    {
-        accessorKey: "isArchived",
-        header: "Archived",
-    },
-    {
-        accessorKey: "isFeatured",
-        header: "Featured",
-    },
+
     {
         accessorKey: "price",
         header: "Price",
@@ -50,6 +44,32 @@ export const columns: ColumnDef<ProductColumn>[] = [
                 style={{ backgroundColor: row.original.color }}
             ></div>
         </div>
+    },
+    {
+        accessorKey: "isFeatured",
+        header: "Featured",
+        cell: ({ row }) => (
+            <div className="flex justify-start items-center">
+
+                <Checkbox
+                    checked={row.original.isFeatured}
+                    className="ml-6"
+                />
+            </div>
+        )
+    },
+    {
+        accessorKey: "isArchived",
+        header: "Archived",
+        cell: ({ row }) => (
+            <div className="flex justify-start items-center">
+
+                <Checkbox
+                    checked={row.original.isArchived}
+                    className="ml-6"
+                />
+            </div>
+        )
     },
     {
         accessorKey: "createdAt",

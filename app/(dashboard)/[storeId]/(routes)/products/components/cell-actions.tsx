@@ -1,6 +1,6 @@
 "use client";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import AlertModal from "@/components/modals/alert-modal";
 
 interface CellActionsProps {
-    data: BillboardColumn
+    data: ProductColumn
 }
 
 const CellActions: React.FC<CellActionsProps> = ({ data }) => {
@@ -27,14 +27,14 @@ const CellActions: React.FC<CellActionsProps> = ({ data }) => {
     const onDelete = async () => {
         try {
             setLoading(true)
-            await fetch(`/api/${params.storeId}/billboards/${data.id}`, {
+            await fetch(`/api/${params.storeId}/products/${data.id}`, {
                 method: "DELETE",
             })
             router.refresh()
-            toast.success("Billboard deleted.")
+            toast.success("Product deleted.")
         }
         catch (err) {
-            toast.error("Make sure you remove all categories using this billboard!")
+            toast.error("Make sure you remove all categories using this product!")
         }
         finally {
             setLoading(false)
@@ -63,7 +63,7 @@ const CellActions: React.FC<CellActionsProps> = ({ data }) => {
                         <Copy className="h-4 w-4 mr-2" />
                         Copy ID
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/products/${data.id}`)}>
                         <Edit className="h-4 w-4 mr-2" />
                         Edit
                     </DropdownMenuItem>

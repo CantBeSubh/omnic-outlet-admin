@@ -316,8 +316,8 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                                     <div className="space-y-1 leading-none">
                                         <TooltipProvider>
                                             <Tooltip>
-                                                <TooltipTrigger>
-                                                    <FormLabel>Featured</FormLabel>
+                                                <TooltipTrigger type="button" >
+                                                    <FormLabel className="hover:cursor-pointer">Featured</FormLabel>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
                                                     <p>Featured products are displayed on the home page</p>
@@ -343,8 +343,8 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                                     <div className="space-y-1 leading-none">
                                         <TooltipProvider>
                                             <Tooltip>
-                                                <TooltipTrigger>
-                                                    <FormLabel>Archived</FormLabel>
+                                                <TooltipTrigger type="button" >
+                                                    <FormLabel className="hover:cursor-pointer">Archived</FormLabel>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
                                                     <p>Archived products are not displayed anywhere on store</p>
