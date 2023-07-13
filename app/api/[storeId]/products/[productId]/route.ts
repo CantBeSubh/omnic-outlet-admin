@@ -14,7 +14,7 @@ export async function GET(
                 id: params.productId,
             },
             include: {
-                Image: true,
+                images: true,
                 category: true,
                 color: true,
                 size: true
@@ -41,12 +41,12 @@ export async function PUT(
     try {
         const { userId } = auth();
         const body = await req.json();
-        const { name, price, categoryId, colorId, sizeId, Image, isFeatured, isArchived } = body;
+        const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
         if (!userId) return new NextResponse("Unathenticated", { status: 401 });
         if (!name) return new NextResponse("Name is required", { status: 400 });
         if (!price) return new NextResponse("Price is required", { status: 400 });
-        if (!Image || !Image.length) return new NextResponse("Images are required", { status: 400 });
+        if (!images || !images.length) return new NextResponse("Images are required", { status: 400 });
         if (!categoryId) return new NextResponse("CategoryID is required", { status: 400 });
         if (!colorId) return new NextResponse("ColorID is required", { status: 400 });
         if (!sizeId) return new NextResponse("SizeID is required", { status: 400 });
@@ -70,7 +70,7 @@ export async function PUT(
                 categoryId,
                 colorId,
                 sizeId,
-                Image: {
+                images: {
                     deleteMany: {},
                 },
                 isFeatured,
@@ -84,10 +84,10 @@ export async function PUT(
                 id: params.productId,
             },
             data: {
-                Image: {
+                images: {
                     createMany: {
                         data: [
-                            ...Image.map((img: { url: string }) => img)
+                            ...images.map((img: { url: string }) => img)
                         ]
                     }
                 }

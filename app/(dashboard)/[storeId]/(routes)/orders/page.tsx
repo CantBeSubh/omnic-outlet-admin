@@ -1,8 +1,9 @@
 import prismadb from "@/lib/prismadb";
-import BillboardClient from "./components/client";
+import OrderClient from "./components/client";
 import { OrderColumn } from "./components/columns";
 import moment from "moment";
 import { formatter } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface OrdersPageProps {
     params: { storeId: string }
@@ -39,7 +40,7 @@ const OrdersPage: React.FC<OrdersPageProps> = async ({ params }) => {
     return (
         <div className="flex-col">
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <BillboardClient data={fOrders} />
+                <OrderClient data={fOrders} />
             </div>
         </div>
     );

@@ -8,7 +8,7 @@ const ProductPage = async ({ params }: { params: { productId: string, storeId: s
             id: params.productId
         },
         include: {
-            Image: true
+            images: true
         }
     })
 

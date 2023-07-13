@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 import AlertModal from "@/components/modals/alert-modal";
 import { useParams, useRouter } from "next/navigation";
-import ApiAlert from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-uplaod";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -27,7 +26,7 @@ import {
 
 
 interface ProductFormProps {
-    initialData: Product & { Image: Image[] } | null;
+    initialData: Product & { images: Image[] } | null;
     categories: Category[];
     sizes: Size[];
     colors: Color[];
@@ -35,7 +34,7 @@ interface ProductFormProps {
 
 const formSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters long").nonempty({ message: "Name is required" }),
-    Image: z.object({ url: z.string() }).array(),
+    images: z.object({ url: z.string() }).array(),
     price: z.coerce.number().min(1, "Price must be at least 1"),
     categoryId: z.string().nonempty({ message: "Category is required" }),
     colorId: z.string().nonempty({ message: "Color is required" }),
@@ -67,7 +66,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
             price: parseFloat(String(initialData?.price))
         } : {
             name: "",
-            Image: [],
+            images: [],
             price: 0,
             categoryId: "",
             colorId: "",
@@ -153,7 +152,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                     <FormField
                         control={form.control}
-                        name="Image"
+                        name="images"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Images</FormLabel>

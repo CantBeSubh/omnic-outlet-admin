@@ -25,7 +25,7 @@ export async function GET(
                 isArchived: false
             },
             include: {
-                Image: true,
+                images: true,
                 category: true,
                 color: true,
                 size: true
@@ -57,10 +57,10 @@ export async function POST(
         const body = await req.json();
         if (!userId) return new NextResponse("Unathenticated", { status: 401 });
 
-        const { name, price, categoryId, colorId, sizeId, Image, isFeatured, isArchived } = body;
+        const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
         if (!name) return new NextResponse("Name is required", { status: 400 });
         if (!price) return new NextResponse("Price is required", { status: 400 });
-        if (!Image || !Image.length) return new NextResponse("Images are required", { status: 400 });
+        if (!images || !images.length) return new NextResponse("Images are required", { status: 400 });
         if (!categoryId) return new NextResponse("CategoryID is required", { status: 400 });
         if (!colorId) return new NextResponse("ColorID is required", { status: 400 });
         if (!sizeId) return new NextResponse("SizeID is required", { status: 400 });
@@ -85,10 +85,10 @@ export async function POST(
                 isFeatured,
                 isArchived,
                 storeId: params.storeId,
-                Image: {
+                images: {
                     createMany: {
                         data: [
-                            ...Image.map((image: { url: string }) => image)
+                            ...images.map((image: { url: string }) => image)
                         ]
                     }
                 }
