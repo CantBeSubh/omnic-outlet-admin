@@ -235,7 +235,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                             name="sizeId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Size</FormLabel>
+                                    <FormLabel>Hero</FormLabel>
                                     <Select
                                         disabled={loading}
                                         onValueChange={field.onChange}
@@ -249,7 +249,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                                         </FormControl>
                                         <SelectContent>
                                             <SelectGroup>
-                                                <SelectLabel>Size</SelectLabel>
+                                                <SelectLabel>Hero</SelectLabel>
                                                 {sizes.map((size) => (
                                                     <SelectItem
                                                         key={size.id}
@@ -270,7 +270,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                             name="colorId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Color</FormLabel>
+                                    <FormLabel>Tier</FormLabel>
                                     <Select
                                         disabled={loading}
                                         onValueChange={field.onChange}
@@ -284,7 +284,7 @@ const ProductForm = ({ initialData, categories, sizes, colors }: ProductFormProp
                                         </FormControl>
                                         <SelectContent>
                                             <SelectGroup>
-                                                <SelectLabel>Color</SelectLabel>
+                                                <SelectLabel>Tier</SelectLabel>
                                                 {colors.map((color) => (
                                                     <SelectItem
                                                         key={color.id}

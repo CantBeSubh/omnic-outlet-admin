@@ -32,9 +32,9 @@ const SizeForm = ({ initialData }: SizeFormProps) => {
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? "Edit Size" : "Create Size"
-    const description = initialData ? "Edit the Size" : "Add a new Size"
-    const toastMsg = initialData ? "Size updated" : "Created new Size"
+    const title = initialData ? "Edit Hero" : "Create Hero"
+    const description = initialData ? "Edit the Hero" : "Add a new Hero"
+    const toastMsg = initialData ? "Hero updated" : "Created new Hero"
     const action = initialData ? "Save Changes" : "Create"
 
     const params = useParams()

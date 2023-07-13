@@ -31,9 +31,9 @@ const ColorForm = ({ initialData }: ColorFormProps) => {
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? "Edit Color" : "Create Color"
-    const description = initialData ? "Edit the Color" : "Add a new Color"
-    const toastMsg = initialData ? "Color updated" : "Created new color"
+    const title = initialData ? "Edit Tier" : "Create Tier"
+    const description = initialData ? "Edit the Tier" : "Add a new Tier"
+    const toastMsg = initialData ? "Tier updated" : "Created new color"
     const action = initialData ? "Save Changes" : "Create"
 
     const params = useParams()

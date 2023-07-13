@@ -21,7 +21,7 @@ const SizeClient: React.FC<SizeClientProps> = ({ data }) => {
     return (
         <>
             <div className="flex items-center justify-between">
-                <Heading title={`Sizes (${data.length})`} description="Manage Sizes for your store" />
+                <Heading title={`Heros (${data.length})`} description="Manage Heros for your store" />
                 <Button onClick={() => router.push(`/${params.storeId}/sizes/new`)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Add New

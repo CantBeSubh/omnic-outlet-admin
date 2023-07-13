@@ -31,7 +31,7 @@ const ProductsPage: React.FC<ProductsPageProps> = async ({ params }) => {
         price: formatter.format(item.price.toNumber()),
         category: item.category.name,
         size: item.size.name,
-        color: item.color.value,
+        color: {value:item.color.value,name:item.color.name},
         createdAt: moment(item.createdAt).format("MMMM Do,YYYY")
     }))
 
